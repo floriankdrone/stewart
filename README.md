@@ -6,4 +6,4 @@
 - [ ] Add Unit tests
 - [ ] Add Controller tests
 - [ ] Add E2E test
-- [ ] Add eslint rules
+- [x] Add eslint rules
