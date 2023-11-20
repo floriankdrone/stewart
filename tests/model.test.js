@@ -5,6 +5,7 @@ const mockedDb = { oneOrNone: jest.fn(), result: jest.fn() };
 
 describe('hasValidPassword', () => {
   it('should return true', () => {
+    const t = null;
     const authWithGoodPassword = new Auth(mockedDb, {
       email: 'test@email.com',
       password: 'password',
