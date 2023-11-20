@@ -10,4 +10,5 @@
 - [ ] Add github action to check eslint rules
 - [ ] Conform the errors
 - [ ] Implement `zot`
-- [ ] Fix prettier
+- [x] Fix prettier
+- [ ] Add github action to launch tests

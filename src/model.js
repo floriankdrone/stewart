@@ -18,15 +18,15 @@ class Auth {
    */
   static async findById(db, id) {
     try {
-      const row = await db.oneOrNone("SELECT * FROM auth WHERE id=$1 LIMIT 1", [
+      const row = await db.oneOrNone('SELECT * FROM auth WHERE id=$1 LIMIT 1', [
         id,
       ]);
       if (!row) return null;
       const { email, password } = row;
       return new Auth(db, { email, password });
     } catch (e) {
-      console.log("🚀 ~ file: model.js:28 ~ Auth ~ findById ~ e:", e);
-      throw new Error("DB error");
+      console.log('🚀 ~ file: model.js:28 ~ Auth ~ findById ~ e:', e);
+      throw new Error('DB error');
     }
   }
 
@@ -39,15 +39,15 @@ class Auth {
   static async findByEmail(db, email) {
     try {
       const row = await db.oneOrNone(
-        "SELECT * FROM auth WHERE email=$1 LIMIT 1",
-        [email]
+        'SELECT * FROM auth WHERE email=$1 LIMIT 1',
+        [email],
       );
       if (!row) return null;
       const { password } = row;
       return new Auth(db, { email, password });
     } catch (e) {
-      console.log("🚀 ~ file: model.js:28 ~ Auth ~ findById ~ e:", e);
-      throw new Error("DB error");
+      console.log('🚀 ~ file: model.js:28 ~ Auth ~ findById ~ e:', e);
+      throw new Error('DB error');
     }
   }
 
@@ -79,19 +79,19 @@ class Auth {
    * Saves the auth object
    */
   async save() {
-    if (!this.isValid()) throw new Error("Auth not valid");
+    if (!this.isValid()) throw new Error('Auth not valid');
 
     try {
       await this.db.result(
-        "INSERT INTO auth(email, password) VALUES(${email}, ${password})",
+        'INSERT INTO auth(email, password) VALUES(${email}, ${password})',
         {
           email: this.email,
           password: this.password,
-        }
+        },
       );
     } catch (e) {
-      console.log("🚀 ~ file: model.js:79 ~ Auth ~ save ~ e:", e);
-      throw new Error("DB error");
+      console.log('🚀 ~ file: model.js:79 ~ Auth ~ save ~ e:', e);
+      throw new Error('DB error');
     }
   }
 }
