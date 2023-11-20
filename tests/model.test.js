@@ -1,4 +1,4 @@
-const { jest, expect, it, describe, beforeEach } = require('@jest/globals');
+const { expect, it, describe, beforeEach } = require('@jest/globals');
 const Auth = require('../src/model');
 
 const mockedDb = { oneOrNone: jest.fn(), result: jest.fn() };
@@ -95,8 +95,8 @@ describe('save', () => {
     expect(mockedIsValid).toBeCalledTimes(1);
     expect(mockedDb.result).toBeCalledTimes(1);
     expect(mockedDb.result).toBeCalledWith(
-      'INSERT INTO auth(email, password) VALUES(${email}, ${password})',
-      { email: 'test@email.com', password: 'password' },
+      'INSERT INTO auth(email, password) VALUES($1, $2)',
+      ['test@email.com', 'password'],
     );
   });
 
@@ -130,8 +130,8 @@ describe('save', () => {
     expect(mockedIsValid).toBeCalledTimes(1);
     expect(mockedDb.result).toBeCalledTimes(1);
     expect(mockedDb.result).toBeCalledWith(
-      'INSERT INTO auth(email, password) VALUES(${email}, ${password})',
-      { email: 'test@email.com', password: 'password' },
+      'INSERT INTO auth(email, password) VALUES($1, $2)',
+      ['test@email.com', 'password'],
     );
   });
 });

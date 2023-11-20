@@ -25,7 +25,6 @@ class Auth {
       const { email, password } = row;
       return new Auth(db, { email, password });
     } catch (e) {
-      console.log('🚀 ~ file: model.js:28 ~ Auth ~ findById ~ e:', e);
       throw new Error('DB error');
     }
   }
@@ -46,7 +45,6 @@ class Auth {
       const { password } = row;
       return new Auth(db, { email, password });
     } catch (e) {
-      console.log('🚀 ~ file: model.js:28 ~ Auth ~ findById ~ e:', e);
       throw new Error('DB error');
     }
   }
@@ -82,15 +80,11 @@ class Auth {
     if (!this.isValid()) throw new Error('Auth not valid');
 
     try {
-      await this.db.result(
-        'INSERT INTO auth(email, password) VALUES(${email}, ${password})',
-        {
-          email: this.email,
-          password: this.password,
-        },
-      );
+      await this.db.result('INSERT INTO auth(email, password) VALUES($1, $2)', [
+        this.email,
+        this.password,
+      ]);
     } catch (e) {
-      console.log('🚀 ~ file: model.js:79 ~ Auth ~ save ~ e:', e);
       throw new Error('DB error');
     }
   }
