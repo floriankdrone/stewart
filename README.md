@@ -9,3 +9,4 @@
 - [x] Add eslint rules
 - [ ] Add github action to check eslint rules
 - [ ] Conform the errors
+- [ ] Implement `zot`
