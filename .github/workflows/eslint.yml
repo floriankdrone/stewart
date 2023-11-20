@@ -45,11 +45,3 @@ jobs:
         with:
           sarif_file: eslint-results.sarif
           wait-for-processing: true
-
-      - name: Add commit status
-        uses: octodemo-resources/github-commit-status@v1
-        with:
-          context: linting
-          state: ${{ job.status == 'success' && 'success' || 'failure' }}
-          description: ESLINT passed
-          target_url: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
