@@ -14,31 +14,45 @@ class Auth {
   /**
    * Find Auth by Id
    * @param {UUID} id
+   * @returns Auth | null
    */
   static async findById(db, id) {
-    const { email, password } = await db.result(
-      "SELECT * FROM auth WHERE id=$1 LIMIT 1",
-      [id]
-    );
-    return new Auth(db, { email, password });
+    try {
+      const row = await db.oneOrNone("SELECT * FROM auth WHERE id=$1 LIMIT 1", [
+        id,
+      ]);
+      if (!row) return null;
+      const { email, password } = row;
+      return new Auth(db, { email, password });
+    } catch (e) {
+      console.log("🚀 ~ file: model.js:28 ~ Auth ~ findById ~ e:", e);
+      throw new Error("DB error");
+    }
   }
 
   /**
    * Find Auth object according to its email
    * @param {Object} db
    * @param {String} email
-   * @returns Auth
+   * @returns Auth | null
    */
   static async findByEmail(db, email) {
-    const { password } = await db.result(
-      "SELECT * FROM auth WHERE email=$1 LIMIT 1",
-      [email]
-    );
-    return new Auth(db, { email, password });
+    try {
+      const row = await db.oneOrNone(
+        "SELECT * FROM auth WHERE email=$1 LIMIT 1",
+        [email]
+      );
+      if (!row) return null;
+      const { password } = row;
+      return new Auth(db, { email, password });
+    } catch (e) {
+      console.log("🚀 ~ file: model.js:28 ~ Auth ~ findById ~ e:", e);
+      throw new Error("DB error");
+    }
   }
 
   /**
-   * TODO: implement function
+   * TODO: implement password rules
    * @returns Boolean
    */
   hasValidPassword() {
@@ -46,7 +60,7 @@ class Auth {
   }
 
   /**
-   * TODO: implement function
+   * TODO: implement email rules
    * @returns Boolean
    */
   hasValidEmail() {
@@ -63,19 +77,22 @@ class Auth {
 
   /**
    * Saves the auth object
-   * TODO: handle duplicate key value error
-   * TODO: handle auth not valid
    */
   async save() {
     if (!this.isValid()) throw new Error("Auth not valid");
 
-    await this.db.none(
-      "INSERT INTO auth(email, password) VALUES(${email}, ${password})",
-      {
-        email: this.email,
-        password: this.password,
-      }
-    );
+    try {
+      await this.db.result(
+        "INSERT INTO auth(email, password) VALUES(${email}, ${password})",
+        {
+          email: this.email,
+          password: this.password,
+        }
+      );
+    } catch (e) {
+      console.log("🚀 ~ file: model.js:79 ~ Auth ~ save ~ e:", e);
+      throw new Error("DB error");
+    }
   }
 }
 
