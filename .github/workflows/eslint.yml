@@ -12,7 +12,8 @@ name: ESLint
 on:
   push:
     branches:
-      - "!master"
+      - '*'
+      - '!master'
 
 jobs:
   eslint:
