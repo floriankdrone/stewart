@@ -12,7 +12,7 @@ name: ESLint
 on:
   push:
     branches:
-      - '!master'
+      - "!master"
 
 jobs:
   eslint:
@@ -47,8 +47,8 @@ jobs:
 
       - name: Add commit status
         uses: octodemo-resources/github-commit-status@v1
-          with:
-            context: linting
-            state: ${{ job.status == 'success' && 'success' || 'failure' }}
-            description: ESLINT passed
-            target_url: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        with:
+          context: linting
+          state: ${{ job.status == 'success' && 'success' || 'failure' }}
+          description: ESLINT passed
+          target_url: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
