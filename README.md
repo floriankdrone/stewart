@@ -10,6 +10,6 @@
 - [ ] Add E2E test
 - [x] Add github action to check eslint rules
 - [ ] Conform the errors
-- [ ] Implement `zot`
+- [x] Implement `zod`
 - [ ] Add github action to launch tests
 - [x] Implement a logger
