@@ -3,6 +3,7 @@ module.exports = {
     browser: true,
     commonjs: true,
     es2021: true,
+    'jest/globals': true,
   },
   extends: ['airbnb-base', 'prettier'],
   overrides: [
@@ -13,6 +14,12 @@ module.exports = {
       files: ['.eslintrc.{js,cjs}'],
       parserOptions: {
         sourceType: 'script',
+      },
+    },
+    {
+      files: ['**/*.spec.js', '**/*.spec.jsx'],
+      env: {
+        jest: true,
       },
     },
   ],
