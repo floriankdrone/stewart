@@ -1,4 +1,4 @@
-const { jest, expect, it, describe, beforeEach } = require('@jest/globals');
+const { expect, it, describe, beforeEach } = require('@jest/globals');
 const Auth = require('../src/model');
 
 const mockedDb = { oneOrNone: jest.fn(), result: jest.fn() };
