@@ -8,8 +8,8 @@
 - [x] Add eslint rules
 - [ ] Add Controller tests
 - [ ] Add E2E test
-- [ ] Add github action to check eslint rules
+- [x] Add github action to check eslint rules
 - [ ] Conform the errors
 - [ ] Implement `zot`
 - [ ] Add github action to launch tests
-- [ ] Implement a logger
+- [x] Implement a logger
