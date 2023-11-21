@@ -1,3 +1,5 @@
+import { DatabaseError, AuthNotValid } from '../src/errors.js';
+
 class Auth {
   /**
    * Constructor
@@ -9,6 +11,7 @@ class Auth {
     const { email, password } = attributes;
     this.email = email;
     this.password = password;
+    this.errors = [];
   }
 
   /**
@@ -54,7 +57,8 @@ class Auth {
    * @returns Boolean
    */
   hasValidPassword() {
-    return !!this.password;
+    if (!this.password) this.errors.push('Password is required');
+    return this.errors.length === 0;
   }
 
   /**
@@ -62,7 +66,8 @@ class Auth {
    * @returns Boolean
    */
   hasValidEmail() {
-    return !!this.email;
+    if (!this.email) this.errors.push('Email is required');
+    return this.errors.length === 0;
   }
 
   /**
@@ -77,7 +82,7 @@ class Auth {
    * Saves the auth object
    */
   async save() {
-    if (!this.isValid()) throw new Error('Auth not valid');
+    if (!this.isValid()) throw new AuthNotValid('Auth not valid', this.errors);
 
     try {
       await this.db.result('INSERT INTO auth(email, password) VALUES($1, $2)', [
@@ -85,7 +90,7 @@ class Auth {
         this.password,
       ]);
     } catch (e) {
-      throw new Error('DB error');
+      throw new DatabaseError(e);
     }
   }
 }
