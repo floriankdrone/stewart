@@ -7,7 +7,8 @@
     "start": "node src/app.js",
     "dev": "nodemon src/app.js",
     "test": "jest",
-    "test:unit": "jest ./__tests__/"
+    "test:unit": "jest ./__tests__/",
+    "test:ci": "jest --ci"
   },
   "author": "kdrone",
   "license": "ISC",
