@@ -33,7 +33,7 @@ jobs:
           npm install @microsoft/eslint-formatter-sarif@2.1.7
 
       - name: Run ESLint
-        run: npm run-script eslint .
+        run: npx eslint .
           --config .eslintrc.js
           --ext .js,.jsx,.ts,.tsx
           --max-warnings=0
