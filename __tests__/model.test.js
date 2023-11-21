@@ -2,7 +2,11 @@ import { jest, expect, it, describe, beforeEach } from '@jest/globals';
 
 import Auth from '../src/model.js';
 
-const mockedDb = { oneOrNone: jest.fn(), result: jest.fn() };
+const mockedDb = {
+  oneOrNone: jest.fn(),
+  result: jest.fn(),
+  manyOrNone: jest.fn(),
+};
 
 describe('hasValidPassword', () => {
   it('should return true', () => {
@@ -152,7 +156,11 @@ describe('findById', () => {
     const auth = await Auth.findById(mockedDb, 1);
 
     expect(auth).toEqual(
-      new Auth(mockedDb, { email: 'test@email.com', password: 'password' }),
+      new Auth(mockedDb, {
+        id: 1,
+        email: 'test@email.com',
+        password: 'password',
+      }),
     );
     expect(mockedDb.oneOrNone).toBeCalledTimes(1);
     expect(mockedDb.oneOrNone).toBeCalledWith(
@@ -206,7 +214,11 @@ describe('findByEmail', () => {
     const auth = await Auth.findByEmail(mockedDb, 'test@email.com');
 
     expect(auth).toEqual(
-      new Auth(mockedDb, { email: 'test@email.com', password: 'password' }),
+      new Auth(mockedDb, {
+        id: 1,
+        email: 'test@email.com',
+        password: 'password',
+      }),
     );
     expect(mockedDb.oneOrNone).toBeCalledTimes(1);
     expect(mockedDb.oneOrNone).toBeCalledWith(
@@ -242,5 +254,44 @@ describe('findByEmail', () => {
       'SELECT * FROM auth WHERE email=$1 LIMIT 1',
       ['test@email.com'],
     );
+  });
+});
+
+describe('findAll', () => {
+  beforeEach(() => {
+    mockedDb.manyOrNone.mockReset();
+  });
+
+  it('should return all accounts', async () => {
+    mockedDb.manyOrNone.mockResolvedValueOnce([
+      {
+        id: 1,
+        email: 'test@email.com',
+        password: 'password',
+      },
+    ]);
+
+    const auth = await Auth.findAll(mockedDb);
+
+    expect(auth).toEqual([
+      new Auth(mockedDb, {
+        id: 1,
+        email: 'test@email.com',
+        password: 'password',
+      }),
+    ]);
+    expect(mockedDb.manyOrNone).toBeCalledTimes(1);
+    expect(mockedDb.manyOrNone).toBeCalledWith('SELECT * FROM auth');
+  });
+
+  it('should throw a Database error when db fails', async () => {
+    mockedDb.manyOrNone.mockImplementationOnce(() => {
+      throw new Error('');
+    });
+
+    await expect(Auth.findAll(mockedDb)).rejects.toThrowErrorMatchingSnapshot();
+
+    expect(mockedDb.manyOrNone).toBeCalledTimes(1);
+    expect(mockedDb.manyOrNone).toBeCalledWith('SELECT * FROM auth');
   });
 });

@@ -6,9 +6,10 @@ class Auth {
    */
   constructor(db, attributes) {
     this.db = db;
-    const { email, password } = attributes;
+    const { id, email, password } = attributes;
     this.email = email;
     this.password = password;
+    this.id = id;
   }
 
   /**
@@ -23,7 +24,7 @@ class Auth {
       ]);
       if (!row) return null;
       const { email, password } = row;
-      return new Auth(db, { email, password });
+      return new Auth(db, { id, email, password });
     } catch (e) {
       throw new Error('DB error');
     }
@@ -42,8 +43,24 @@ class Auth {
         [email],
       );
       if (!row) return null;
-      const { password } = row;
-      return new Auth(db, { email, password });
+      const { id, password } = row;
+      return new Auth(db, { id, email, password });
+    } catch (e) {
+      throw new Error('DB error');
+    }
+  }
+
+  /**
+   * Retrieves all accounts
+   * @param {Object} db
+   * @returns Array<Auth>
+   */
+  static async findAll(db) {
+    try {
+      const rows = await db.manyOrNone('SELECT * FROM auth');
+      return rows.map(
+        ({ id, email, password }) => new Auth(db, { id, email, password }),
+      );
     } catch (e) {
       throw new Error('DB error');
     }

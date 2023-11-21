@@ -10,7 +10,8 @@
 - [x] Implement `zod`
 - [x] Implement a logger
 - [x] Add github action to launch tests
+- [x] Implement Find All function
 - [ ] Add Controller tests
 - [ ] Add E2E test
-- [ ] Conform the errors
-- [ ] Convert into ecmascript
+- [ ] Add Password rule in Auth model
+- [ ] Add Email rule in Auth model
