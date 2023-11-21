@@ -1,4 +1,5 @@
-import { DatabaseError, AuthNotValid } from '../src/errors.js';
+import DatabaseError from './errors/DatabaseError.js';
+import AuthNotValid from './errors/AuthNotValid.js';
 
 class Auth {
   /**
@@ -29,7 +30,7 @@ class Auth {
       const { email, password } = row;
       return new Auth(db, { id, email, password });
     } catch (e) {
-      throw new Error('DB error');
+      throw new DatabaseError(e);
     }
   }
 
@@ -49,7 +50,7 @@ class Auth {
       const { id, password } = row;
       return new Auth(db, { id, email, password });
     } catch (e) {
-      throw new Error('DB error');
+      throw new DatabaseError(e);
     }
   }
 
@@ -65,7 +66,7 @@ class Auth {
         ({ id, email, password }) => new Auth(db, { id, email, password }),
       );
     } catch (e) {
-      throw new Error('DB error');
+      throw new DatabaseError(e);
     }
   }
 
