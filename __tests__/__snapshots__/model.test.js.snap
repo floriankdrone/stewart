@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`findByEmail should handle a database error 1`] = `"DB error"`;
+
+exports[`findById should handle a database error 1`] = `"DB error"`;
+
+exports[`save should throw an error since auth attributes are not valid 1`] = `"Auth not valid"`;
+
+exports[`save should throw an error when database throws an error 1`] = `"DB error"`;

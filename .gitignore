@@ -2,4 +2,3 @@ node_modules/
 .vscode/
 .env
 coverage/
-__tests__/__snapshots__/
