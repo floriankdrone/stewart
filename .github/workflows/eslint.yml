@@ -34,7 +34,6 @@ jobs:
 
       - name: Run ESLint
         run: npm run-script eslint .
-          --config .eslintrc.cjs
           --ext .js,.jsx,.ts,.tsx
           --max-warnings=0
           --format @microsoft/eslint-formatter-sarif
