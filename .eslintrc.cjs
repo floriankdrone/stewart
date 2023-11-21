@@ -1,7 +1,6 @@
 module.exports = {
   env: {
     browser: true,
-    commonjs: true,
     es2021: true,
     'jest/globals': true,
   },
@@ -25,9 +24,17 @@ module.exports = {
   ],
   parserOptions: {
     ecmaVersion: 'latest',
+    sourceType: 'module',
   },
   plugins: ['jest', 'prettier'],
   rules: {
     'prettier/prettier': 'error',
+    'import/extensions': [
+      'error',
+      'always',
+      {
+        ignorePackages: true,
+      },
+    ],
   },
 };

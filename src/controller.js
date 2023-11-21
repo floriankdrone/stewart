@@ -1,5 +1,6 @@
-const express = require('express');
-const Auth = require('./model');
+import express from 'express';
+
+import Auth from './model.js';
 
 const router = express.Router();
 
@@ -34,4 +35,4 @@ router.post('/', async (req, res) => {
  */
 router.put('/:id', async (_, res) => res.status(405).json());
 
-module.exports = router;
+export default router;

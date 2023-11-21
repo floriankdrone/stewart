@@ -2,14 +2,16 @@
   "name": "stewart",
   "version": "1.0.0",
   "description": "",
-  "main": "src/app.js",
+  "exports": "./src/app.js",
   "scripts": {
     "start": "node src/app.js",
     "dev": "nodemon src/app.js",
-    "test": "jest",
-    "test:unit": "jest ./__tests__/",
-    "test:ci": "jest --ci"
+    "test": "NODE_OPTIONS=--experimental-vm-modules npx jest",
+    "test:unit": "NODE_OPTIONS=--experimental-vm-modules npx jest ./__tests__/",
+    "test:ci": "NODE_OPTIONS=--experimental-vm-modules npx jest --ci",
+    "eslint": "eslint . --config .eslintrc.cjs"
   },
+  "type": "module",
   "author": "kdrone",
   "license": "ISC",
   "dependencies": {
