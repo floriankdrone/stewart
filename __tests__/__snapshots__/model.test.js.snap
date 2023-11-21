@@ -1,5 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`findAll should throw a Database error when db fails 1`] = `"DB error"`;
+
 exports[`findByEmail should handle a database error 1`] = `"DB error"`;
 
 exports[`findById should handle a database error 1`] = `"DB error"`;
