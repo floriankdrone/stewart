@@ -1,6 +1,6 @@
-const { expect, it, describe, beforeEach } = require('@jest/globals');
+import { jest, expect, it, describe, beforeEach } from '@jest/globals';
 
-const Auth = require('../src/model');
+import Auth from '../src/model.js';
 
 const mockedDb = { oneOrNone: jest.fn(), result: jest.fn() };
 

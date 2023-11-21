@@ -1,4 +1,4 @@
-const { z } = require('zod');
+import { z } from 'zod';
 
 function config(logger) {
   const envSchema = z.object({
@@ -35,4 +35,4 @@ function config(logger) {
   return Object.freeze(parsed.data);
 }
 
-module.exports = config;
+export default config;

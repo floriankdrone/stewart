@@ -9,7 +9,8 @@
 - [x] Add github action to check eslint rules
 - [x] Implement `zod`
 - [x] Implement a logger
+- [x] Add github action to launch tests
 - [ ] Add Controller tests
 - [ ] Add E2E test
 - [ ] Conform the errors
-- [ ] Add github action to launch tests
+- [ ] Convert into ecmascript
