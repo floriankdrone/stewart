@@ -9,7 +9,7 @@
     "test": "NODE_OPTIONS=--experimental-vm-modules npx jest",
     "test:unit": "NODE_OPTIONS=--experimental-vm-modules npx jest ./__tests__/",
     "test:ci": "NODE_OPTIONS=--experimental-vm-modules npx jest --ci",
-    "eslint": "eslint ."
+    "eslint": "eslint . --config .eslintrc.cjs"
   },
   "type": "module",
   "author": "kdrone",

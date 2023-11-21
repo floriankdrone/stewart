@@ -29,5 +29,12 @@ module.exports = {
   plugins: ['jest', 'prettier'],
   rules: {
     'prettier/prettier': 'error',
+    'import/extensions': [
+      'error',
+      'always',
+      {
+        ignorePackages: true,
+      },
+    ],
   },
 };
