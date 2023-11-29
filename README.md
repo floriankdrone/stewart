@@ -10,6 +10,8 @@
 - [x] Implement `zod`
 - [x] Implement a logger
 - [x] Add github action to launch tests
+- [x] Convert into ecmascript
+- [x] Conform the errors
 - [x] Implement Find All function
 - [ ] Add Controller tests
 - [ ] Add E2E test
